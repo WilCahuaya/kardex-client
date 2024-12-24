@@ -104,3 +104,18 @@
 
   --background-color: var(--gray-200);
 }
+
+[data-theme="dark"] {
+  --background-color: var(--gray-700);
+}
+
+[data-theme="green"] {
+  --background-color: var(--green-700);
+}
+
+/* Agrega más temas aquí */
+/* [data-theme='ocean'] {
+  --bg-color: #013a63;
+  --text-color: #d9faff;
+  --primary-color: #00aaff;
+} */

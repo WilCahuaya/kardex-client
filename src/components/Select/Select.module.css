@@ -7,5 +7,5 @@
 }
 
 .color {
-  color: blue;
+  color: var(--background-color);
 }

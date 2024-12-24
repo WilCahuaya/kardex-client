@@ -1,7 +1,6 @@
-import { useContext } from "react";
 import s from "./Select.module.css";
 import clsx from "clsx";
-import { ThemeContext } from "../../contexts/ThemeContext";
+import { useTheme } from "../../contexts/ThemeContext";
 
 export type selectOption = {
   label: string;
@@ -9,30 +8,21 @@ export type selectOption = {
 };
 
 type Props = {
+  options: selectOption[];
   disabled?: boolean;
   className?: string;
 };
 
-const options: selectOption[] = [
-  { label: "claro", value: "light" },
-  { label: "oscuro", value: "dark" },
-  { label: "verde", value: "green" },
-];
-
-const Select = ({ disabled, className = "color" }: Props) => {
+const Select = ({ options, disabled, className = "color" }: Props) => {
   const classNames = clsx(s[className], s.caja);
 
-  const themeContext = useContext(ThemeContext);
-
-  if (!themeContext) {
-    throw new Error("Theme debe usarse dentro de un ThemeProvider");
-  }
+  const { theme, setTheme } = useTheme();
 
   const setNewTheme = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    themeContext.newSetTheme(
-      event.target.selectedOptions[0].innerText,
-      event.target.value
-    );
+    setTheme({
+      label: event.target.selectedOptions[0].text,
+      value: event.target.value,
+    });
   };
 
   return (
@@ -40,7 +30,7 @@ const Select = ({ disabled, className = "color" }: Props) => {
       className={classNames}
       disabled={disabled}
       onChange={setNewTheme}
-      value={themeContext.value}
+      value={theme.value}
     >
       {options.map(({ value, label }) => (
         <option key={value} value={value}>
