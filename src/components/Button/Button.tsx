@@ -1,8 +1,9 @@
-import { useTheme } from "../../contexts/ThemeContext";
-
 function Button() {
-  const { theme } = useTheme();
-  return <div>{theme.value}</div>;
+  return (
+    <div>
+      <button>Holas</button>
+    </div>
+  );
 }
 
 export default Button;
